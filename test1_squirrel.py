@@ -16,4 +16,5 @@ def squirrel(nuts: int) -> int:
     # Change integer to str type.
     type_str = str(factorial)
 
-    return type_str[0]
+    return int(type_str[0])
+
