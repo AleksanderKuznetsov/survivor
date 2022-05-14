@@ -55,6 +55,3 @@ def ConquestCampaign(N: int, M: int, L: int, battalion: list) -> int:
 
     return day
 
-
-print(ConquestCampaign(3, 4, 2, [2, 2, 3, 4]))
-
