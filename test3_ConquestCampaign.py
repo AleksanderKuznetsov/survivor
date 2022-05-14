@@ -54,4 +54,3 @@ def ConquestCampaign(N: int, M: int, L: int, battalion: list) -> int:
         day += 1
 
     return day
-
