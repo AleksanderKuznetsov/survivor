@@ -12,7 +12,7 @@ def MadMax(N: int, Tele: list) -> list:
     """
     index = -1
     # Sorting the array.
-    for i in range(N - 2):
+    for i in range(N-1):
         for j in range(N-i-1):
             if Tele[j] > Tele[j+1]:
                 Tele[j], Tele[j+1] = Tele[j+1], Tele[j]
