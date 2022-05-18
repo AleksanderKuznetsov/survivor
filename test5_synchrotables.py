@@ -11,7 +11,7 @@ def SynchronizingTables(N: int, ids: list, salary: list) -> list:
     :return: sorted list 2
     """
 
-    for z in range(2):
+    for z in range(N):
         for i in range(N):
             for j in range(N):
                 if ids[i] > ids[j] and salary[i] < salary[j]:
