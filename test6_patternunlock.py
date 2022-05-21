@@ -3,7 +3,7 @@ Return line length (Task Unlock mobile phones)
 """
 
 
-def pattern_unlock(length: int, hits: list) -> str:
+def PatternUnlock(length: int, hits: list) -> str:
     """
     :param length: array length
     :param hits: character input sequence
