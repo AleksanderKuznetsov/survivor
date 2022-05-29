@@ -41,7 +41,7 @@ def TheRabbitsFoot(line: str, encode: bool) -> str:
             for j in range(len(array_start[i])):
                 if j == z:
                     array_finish.append(array_start[i][j])
-        if encode:  # Add spaces.
+        if encode and len(array_start) - z - 1 != 0:  # Add spaces, except the last.
             array_finish.append(" ")
 
     return "".join(array_finish)
