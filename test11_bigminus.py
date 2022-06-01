@@ -14,6 +14,3 @@ def BigMinus(line1: str, line2: str) -> str:
     else:
         result = int(line2) - int(line1)
     return str(result)
-
-
-print(BigMinus("12345678912345678912341", "1"))
