@@ -40,4 +40,4 @@ def BigMinus(line1: str, line2: str) -> str:
         # Add to the beginning of the array.
         array_.insert(0, str(result))
 
-    return "".join(array_)
+    return str(int("".join(array_)))
