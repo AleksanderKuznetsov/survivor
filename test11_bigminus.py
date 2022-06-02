@@ -24,17 +24,20 @@ def BigMinus(line1: str, line2: str) -> str:
 
     # Cycle through line1 from the end to the beginning.
     for i in range(len(line1)-1, -1, -1):
-        if int(line1[i]) - int(line2[i]) < 0 and not flag:
-            result = int(line1[i]) + 10 - int(line2[i])
+        value1 = int(line1[i])
+        value2 = int(line2[i])
+        if value1 - value2 < 0 and not flag:
+            result = value1 + 10 - int(line2[i])
             flag = True
-        elif int(line1[i]) - int(line2[i]) <= 0 and flag:
-            result = int(line1[i]) + 9 - int(line2[i])
+        elif value1 - value2 <= 0 and flag:
+            result = value1 + 9 - value2
         elif flag:
-            result = int(line1[i]) - 1 - int(line2[i])
+            result = value1 - 1 - value2
             flag = False
         else:
-            result = int(line1[i]) - int(line2[i])
+            result = value1 - value2
             flag = False
+        # Add to the beginning of the array.
         array_.insert(0, str(result))
 
     return "".join(array_)
