@@ -17,11 +17,15 @@ def UFO(count: int, data: list, octal: bool) -> list:
     else:
         num = 16
 
-    for dat in data:
+    for dat in range(count):
         summa = 0
-        value = list(str(dat))
-        for j in range(count):
-            summa += int(value[j])*num**(count-1-j)
+        value = list(str(data[dat]))
+        lenn = len(value)
+        for j in range(lenn):
+            summa += int(value[j])*num**(lenn-1-j)
         array.append(summa)
 
     return array
+
+
+print(UFO(2, [1234, 1777], False))
