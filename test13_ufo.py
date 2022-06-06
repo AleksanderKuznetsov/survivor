@@ -26,6 +26,3 @@ def UFO(count: int, data: list, octal: bool) -> list:
         array.append(summa)
 
     return array
-
-
-print(UFO(2, [1234, 1777], False))
