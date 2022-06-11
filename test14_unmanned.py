@@ -25,6 +25,3 @@ def Unmanned(road: int, lights: int, track: list) -> int:
         dist += 1
 
     return time
-
-
-print(Unmanned(10, 2, [[3, 5, 5], [5, 2, 2]]))
