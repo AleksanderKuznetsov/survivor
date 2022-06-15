@@ -19,8 +19,11 @@ def TankRush(str1: int, col1: int, map1: str, str2: int, col2: int, map2: str) -
     array1 = []
     array2 = []
     result = 0
+    count = 0
     # Create array1
     count = 0
+    last_col = 0
+    last_str = 0
     for i in range(str1):
         temp = []
         for j in range(col1):
@@ -37,6 +40,7 @@ def TankRush(str1: int, col1: int, map1: str, str2: int, col2: int, map2: str) -
             count += 1
         array2.append(temp)
 
+    count = 0
     # Looking for entry.
     for z in range(str1):  # Go through the rows of array1.
         for i in range(col1 - col2 + 1):  # Going through each column.
@@ -44,8 +48,17 @@ def TankRush(str1: int, col1: int, map1: str, str2: int, col2: int, map2: str) -
             for j in range(col2):
                 temp.append(array1[z][i + j])  # Filling the temp array.
             for ii in range(str2):
-                if temp == array2[ii]:  # Temporary array equals array row 2.
+                if temp == array2[ii] and count == 0:  # Temporary array equals array row 2.
+                    count += 1
+                    last_col = i
+                    last_str = z
                     result += 1
+                elif temp == array2[ii] and count > 0 and i == last_col and z - last_str == 1:
+                    result += 1
+                    last_col = i
+                    last_str = z
+                elif temp == array2[ii] and count > 0 and (i != last_col or z - last_str != 1):
+                    count = 0
 
     if result >= str2:
         return True
