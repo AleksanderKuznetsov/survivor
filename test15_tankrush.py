@@ -1,65 +1,75 @@
 """
-Checking if the second array is included in the first one (in two dimensions).
+Проверить, входит ли второй массив в первый (в двумерном виде).
 """
 
 
 def TankRush(str1: int, col1: int, map1: str, str2: int, col2: int, map2: str) -> bool:
     """
-    :param str1: number of rows of the 1st array.
-    :param col1: number of columns of the 1st array.
-    :param map1: array1 in string with spaces.
-    :param str2: number of rows of the 2nd array.
-    :param col2: number of columns of the 2nd array.
-    :param map2: array2 in string with spaces.
-    :return: contains - True, not - False .
+    print(TankRush(3, 3, '321 694 798', 2, 2, '32 94')) - пример
+    :param str1: количество строк массива1.
+    :param col1: количество столбцов массива1.
+    :param map1: массив1 в виде строки с пробелами.
+    :param str2: количество строк массива2.
+    :param col2: количество столбцов массива2.
+    :param map2: массив2 в виде строки с пробелами.
+    :return: если массив2  входит - True, если нет - False .
     """
-    # Remove spaces from strings
+    # Удалим пробелы из строк, чтобы перевести в массив.
     map1 = map1.replace(" ", "")
     map2 = map2.replace(" ", "")
     array1 = []
     array2 = []
     result = 0
-    count = 0
-    # Create array1
-    count = 0
-    last_col = 0
-    last_str = 0
-    for i in range(str1):
-        temp = []
-        for j in range(col1):
-            temp.append(map1[count])
-            count += 1
-        array1.append(temp)
+    last_col = 0  # Номер предыдущего элемента в столбце.
+    last_str = 0  # Переменная для проверки предыдущей строки.
 
-    # Create array2.
+    # Из строки1 сделаем массив1
+    count = 0
+    for i in range(str1):
+        temp = []  # Временный массив.
+        for j in range(col1):
+            temp.append(map1[count])  # Наполним временный массив.
+            count += 1
+        array1.append(temp)  # Сложим в двумерный массив.
+
+    # Из строки2 сделаем массив2
     count = 0
     for i in range(str2):
-        temp = []
+        temp = []  # Временный массив.
         for j in range(col2):
-            temp.append(map2[count])
+            temp.append(map2[count])  # Наполним временный массив.
             count += 1
-        array2.append(temp)
+        array2.append(temp)  # Сложим в двумерный массив.
 
-    count = 0
-    # Looking for entry.
-    for z in range(str1):  # Go through the rows of array1.
-        for i in range(col1 - col2 + 1):  # Going through each column.
-            temp = []
+    # Проверяем вложенность.
+    count = 0  # Счетчик, который показывает первое совпадение или нет.
+    for z in range(str1):  # Проходим по строкам массива1
+        for i in range(col1 - col2 + 1):  # Проходим по столбцу массива1.
+            temp = []  # Временный массив.
+            # Во временный массив складываем из массива1 символы по количеству
+            # символов в столбце массива2.
             for j in range(col2):
                 temp.append(array1[z][i + j])  # Filling the temp array.
+            # Сравниваем временный массив и строку массива2
             for ii in range(str2):
-                if temp == array2[ii] and count == 0:  # Temporary array equals array row 2.
+                # Если совпадает и это первое совпадение.
+                if temp == array2[ii] and count == 0:
                     count += 1
-                    last_col = i
-                    last_str = z
-                    result += 1
+                    last_col = i  # Запомним номер символа в строке.
+                    last_str = z  # Запомним номер строки в массиве1.
+                    result += 1  # Увеличим результат.
+                # Если совпадает и совпадение не первое и номер строки совпадает
+                # и это следующая строка после предыдущего совпадения.
                 elif temp == array2[ii] and count > 0 and i == last_col and z - last_str == 1:
                     result += 1
                     last_col = i
                     last_str = z
+                # Если совпадает и совпадение не первое и номер строки НЕ совпадает или
+                # это НЕ следующая строка после предыдущего совпадения (есть пропуск).
                 elif temp == array2[ii] and count > 0 and (i != last_col or z - last_str != 1):
-                    count = 0
+                    count = 0  # Обнулим счетчки
 
+    # Количество совпадений >= количеству строк массива2.
     if result >= str2:
         return True
 
