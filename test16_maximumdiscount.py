@@ -11,6 +11,10 @@ def MaximumDiscount(count: int, price: list) -> int:
     """
     xchange = True
     discount = 0
+
+    if len(price) <= 2:
+        return 0
+
     # Sort array in descending order.
     while xchange:
         xchange = False
