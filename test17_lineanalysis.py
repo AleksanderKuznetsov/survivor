@@ -27,6 +27,3 @@ def LineAnalysis(lines: str) -> bool:
             diff = count_new - count_old
 
     return True
-
-
-print(LineAnalysis("*.*..*"))
