@@ -37,7 +37,7 @@ def ShopOLAP(N: int, array: list) -> list:
             # Iterate over the resulting array.
             for z, res_rec in enumerate(array_result):
                 # If the first element is already in the array, change the flag.
-                if rec[0] in res_rec[0]:
+                if rec[0] == res_rec[0]:
                     flag = True
         # If the flag is not True, then there was no match. Add to array.
         # So we will not add repetitions.
@@ -56,3 +56,5 @@ def ShopOLAP(N: int, array: list) -> list:
         array.append(' '.join(line))
 
     return array
+
+print(ShopOLAP(8,['123 5','32 3','124 5','128 1','32 2','23 4','128 4','128 1']))
