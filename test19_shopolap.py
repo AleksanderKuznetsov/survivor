@@ -56,5 +56,3 @@ def ShopOLAP(N: int, array: list) -> list:
         array.append(' '.join(line))
 
     return array
-
-print(ShopOLAP(8,['123 5','32 3','124 5','128 1','32 2','23 4','128 4','128 1']))
