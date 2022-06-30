@@ -94,7 +94,3 @@ def BastShoe(command: str):
 
     if command[0] == '5':
         return example.redo()
-
-
-
-
