@@ -114,6 +114,9 @@ class NewLine:
         if count_undo < len(self.accumulation) - 1:
             self.accumulation.insert(0, self.accumulation[-1])
             self.accumulation.pop(-1)
+        else:
+            self.result = ""
+            return self.result
         # Взять последний элемент массива.
         self.result = self.accumulation[-1]
         self.operations.append("undo")
