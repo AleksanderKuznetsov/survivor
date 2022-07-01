@@ -5,7 +5,7 @@ Make a text editor.
 
 class NewLine:
     """
-    Actions in a text editor. Without encapsulation
+    Actions in a text editor. without encapsulation
     """
     def __init__(self, line=[], accumulation=[], result='', operations=[]):
         self.line = line  # Массив текущего состояние строки. Сюда добавляем/удаляем символы.
@@ -91,9 +91,18 @@ class NewLine:
         if flag_s == 1:
             self.result = self.accumulation[-2]
             return self.result
+
+        count_undo = 0
+        for i in range(len(self.operations)-1, 0, -1):
+            if self.operations[i] == "undo":
+                count_undo += 1
+            else:
+                break
         # Поменять местами первый и последний элемент - делаем сдвиг массива.
-        self.accumulation.insert(0, self.accumulation[-1])
-        self.accumulation.pop(-1)
+        # Вначале проверка, чтобы отмен было не больше, чем длина accumulation.
+        if count_undo < len(self.accumulation) - 1:
+            self.accumulation.insert(0, self.accumulation[-1])
+            self.accumulation.pop(-1)
         # Взять последний элемент массива.
         self.result = self.accumulation[-1]
         self.operations.append("undo")
