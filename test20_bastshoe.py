@@ -82,9 +82,9 @@ class NewLine:
         if count + 1 > len(xx):
             self.line.clear()
             self.operations.append("i")
-            return self.line
+            return ''.join(self.line)
         self.operations.append("i")
-        return xx[count]
+        return ''.join(xx[count])
 
     def undo(self):
         """
@@ -114,9 +114,6 @@ class NewLine:
         if count_undo < len(self.accumulation) - 1:
             self.accumulation.insert(0, self.accumulation[-1])
             self.accumulation.pop(-1)
-        else:
-            self.result = ""
-            return self.result
         # Взять последний элемент массива.
         self.result = self.accumulation[-1]
         self.operations.append("undo")
@@ -138,9 +135,9 @@ class NewLine:
             if self.operations[i] == "redo":
                 redo_x += 1
                 continue
-            elif self.operations[i] == "undo":
+            if self.operations[i] == "undo":
                 undo_x += 1
-            elif self.operations[i] != "undo":
+            if self.operations[i] != "undo":
                 break
         # Поменять местами первый и последний элемент - делаем сдвиг массива.
         if redo_x < undo_x:
@@ -173,17 +170,16 @@ def BastShoe(command: str):
     if command[0] == '1':
         return example.s(command[1])
 
-    elif command[0] == '2':
+    if command[0] == '2':
         return example.n(command[1])
 
-    elif command[0] == '3':
+    if command[0] == '3':
         return example.i(command[1])
 
-    elif command[0] == '4':
+    if command[0] == '4':
         return example.undo()
 
-    elif command[0] == '5':
+    if command[0] == '5':
         return example.redo()
 
-    else:
-        return example.error()
+    return example.error()
