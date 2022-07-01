@@ -60,7 +60,10 @@ class NewLine:
             # Символов к удалению больше или равно, чем длина строки
             if count >= len(self.line) and i == 0:
                 self.line.clear()
-                break
+                self.accumulation.clear()
+                self.result = ''.join(self.line)
+                self.operations.append("n")
+                return self.result
             self.line.pop()  # Удалить по одному
         self.result = ''.join(self.line)
         self.accumulation.append(self.result)  # Добавить в массив состояний строк.
