@@ -127,7 +127,7 @@ class TestWork(unittest.TestCase):
 
     def test_task(self):
         """
-        Повторяю алгоритм задания
+        Повторяю алгоритм задания.
         """
         make_str(3)  # Результат "012"
         BastShoe("2 2")  # Результат "0"
