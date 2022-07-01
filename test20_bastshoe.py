@@ -48,6 +48,14 @@ class NewLine:
         :return: текущее состояние строки
         """
         count = int(count)
+        if len(self.operations) > 1 and self.operations[-1] == "undo":
+            # Сохранить в переменную последний элемент массива состояний.
+            xxx = self.accumulation[-1]
+            # Обнулить массивы.
+            self.accumulation.clear()
+            self.operations.clear()
+            # В массиве состояний оставить последний элемент.
+            self.accumulation.append(xxx)
         for i in range(count):
             # Символов к удалению больше или равно, чем длина строки
             if count >= len(self.line) and i == 0:
@@ -173,3 +181,94 @@ def BastShoe(command: str):
 
     else:
         return example.error()
+
+
+# print("1 Привет")
+# print(BastShoe("1 Привет"))
+#
+# print("1 , Мир!")
+# print(BastShoe("1 , Мир!"))
+#
+# print("1 ++")
+# print(BastShoe("1 ++"))
+#
+# print("2 2")
+# print(BastShoe("2 2"))
+#
+# print("4")
+# print(BastShoe("4"))
+#
+# print("4")
+# print(BastShoe("4"))
+#
+# print("1 *")
+# print(BastShoe("1 *"))
+#
+# print("4")
+# print(BastShoe("4"))
+#
+# print("4")
+# print(BastShoe("4"))
+#
+# print("4")
+# print(BastShoe("4"))
+#
+# print("3 6")
+# print(BastShoe("3 6"))
+#
+# print("2 100")
+# print(BastShoe("2 100"))
+
+print("1 Привет")
+print(BastShoe("1 Привет"))
+
+print("1 , Мир!")
+print(BastShoe("1 , Мир!"))
+
+print("1 ++")
+print(BastShoe("1 ++"))
+
+print("4")
+print(BastShoe("4"))
+
+print("4")
+print(BastShoe("4"))
+
+print("5")
+print(BastShoe("5"))
+
+print("4")
+print(BastShoe("4"))
+
+print("5")
+print(BastShoe("5"))
+
+print("5")
+print(BastShoe("5"))
+
+print("5")
+print(BastShoe("5"))
+
+print("5")
+print(BastShoe("5"))
+
+print("4")
+print(BastShoe("4"))
+
+print("4")
+print(BastShoe("4"))
+
+print("2 2")
+print(BastShoe("2 2"))
+
+print("4")
+print(BastShoe("4"))
+
+print("5")
+print(BastShoe("5"))
+
+print("5")
+print(BastShoe("5"))
+
+print("5")
+print(BastShoe("5"))
