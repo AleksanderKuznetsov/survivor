@@ -8,74 +8,74 @@ class NewLine:
     Actions in a text editor. without encapsulation
     """
     def __init__(self, line=[], accumulation=[], result='', operations=[]):
-        self.line = line  # Массив текущего состояние строки. Сюда добавляем/удаляем символы.
-        self.accumulation = accumulation  # Массив состояний строк после каждого этапа.
-        self.result = result  # Результат, который выводим после каждого шага (str).
-        self.operations = operations  # Список операций.
+        self.line = line  # Array of the current row state. Add/remove characters here.
+        self.accumulation = accumulation  # Array of row states after each step.
+        self.result = result  # The result that we print after each step (str).
+        self.operations = operations  # List of operations.
 
     # В конец текущей строки добавить строку
     def s(self, text):
         """
-        Проверяем условие добавляется ли строка после отмены.
-        По заданию предыдущая цепочка операций для Undo обнуляется -
-        (откатить можно только последнюю операцию 1 или 2).
+         Whether we check a condition the line is added after cancellation.
+         By assignment, the previous chain of operations for Undo is reset to zero -
+         (only the last operation 1 or 2 can be rolled back).
         """
         if len(self.operations) > 1 and self.operations[-1] == "undo":
-            # Сохранить в переменную последний элемент массива состояний.
+            # Save the last element of the state array to a variable.
             xxx = self.accumulation[-1]
-            # Обнулить массивы.
+            # Zero out arrays.
             self.line.clear()
             self.accumulation.clear()
             self.operations.clear()
-            # В массиве состояний оставить последний элемент.
+            # Leave the last element in the state array.
             self.accumulation.append(xxx)
-            # В массив текущего состояния добавить последний элемент.
+            # Add the last element to the current state array.
             for i in self.accumulation:
                 self.line.append(i)
-        # Добавить элемент по заданию.
+        # Add item by assignment.
         for t in text:
             self.line.append(t)
         self.result = ''.join(self.line)
-        self.accumulation.append(self.result)  # Добавить в массив состояний строк.
+        self.accumulation.append(self.result)  # Add to row state array.
         self.operations.append("s")
         return self.result
 
     def n(self, count):
         """
-        Удалить N символов из конца текущей строки.
-        Если N больше длины текущей строки, удаляем из неё все символы.
-        :param count: сколько символов удалить
-        :return: текущее состояние строки
+         Remove N characters from the end of the current line.
+         If N is greater than the length of the current string, remove all characters from it.
+         :param count: how many characters to remove
+         :return: the current state of the row
         """
         count = int(count)
         if len(self.operations) > 1 and self.operations[-1] == "undo":
-            # Сохранить в переменную последний элемент массива состояний.
+            # Save the last element of the state array to a variable.
             xxx = self.accumulation[-1]
-            # Обнулить массивы.
+            # Zero out arrays.
             self.accumulation.clear()
             self.operations.clear()
-            # В массиве состояний оставить последний элемент.
+            # Leave the last element in the state array.
             self.accumulation.append(xxx)
         for i in range(count):
-            # Символов к удалению больше или равно, чем длина строки
+            # The characters to be removed are greater than or equal to the length of the string
             if count >= len(self.line) and i == 0:
                 self.line.clear()
                 self.accumulation.clear()
                 self.result = ''.join(self.line)
                 self.operations.append("n")
                 return self.result
-            self.line.pop()  # Удалить по одному
+            self.line.pop()  # Delete one by one
         self.result = ''.join(self.line)
-        self.accumulation.append(self.result)  # Добавить в массив состояний строк.
+        self.accumulation.append(self.result)  # Add to row state array.
         self.operations.append("n")
         return self.result
 
     def i(self, count):
         """
-        Выдать i-й символ текущей строки.
-        Если индекс за пределами строки, вернуть пустую строку
-        :param count: Номер символа с 0
-        :return: Текущее состояние строки
+         Print the i-th character of the current line.
+         If index is outside of string, return empty string
+         :param count: Character number since 0
+         :return: The current state of the row
         """
         count = int(count)
         xx = list(''.join(self.line))
@@ -88,17 +88,18 @@ class NewLine:
 
     def undo(self):
         """
-        Отменить последнее действие.
-        :return: Текущее состояние строки
+         Undo the last action.
+         :return: The current state of the row
         """
         # Вначале отработать условие - если undo выполняется после обнуления.
-        # Посчитать сколько добавлений "s" было.
+        # Посчитать сколько добавлений "s" и "n" было.
         flag_s = 0
         for line in self.operations:
-            if line == "s":
+            if line == "s" or line == "n":
                 flag_s += 1
-        # Если было одно добавление, то не меняем местами элементы accumulation,
-        # как это делать будем ниже. Взять предпоследний элемент.
+        # If there was one addition, then do not swap the accumulation elements,
+        # how to do it will be below. Take the penultimate element.
+        # This is necessary so as not to erase all the lines when canceling multiple times.
         if flag_s == 1:
             self.result = self.accumulation[-2]
             return self.result
@@ -109,12 +110,16 @@ class NewLine:
                 count_undo += 1
             else:
                 break
-        # Поменять местами первый и последний элемент - делаем сдвиг массива.
-        # Вначале проверка, чтобы отмен было не больше, чем длина accumulation.
+        # Swap the first and last element - we shift the array.
+        # First check that there are no more undos than the length of accumulations.
         if count_undo < len(self.accumulation) - 1:
             self.accumulation.insert(0, self.accumulation[-1])
             self.accumulation.pop(-1)
-        # Взять последний элемент массива.
+        else:
+            self.result = ""
+            self.operations.append("undo")
+            return self.result
+            # Взять последний элемент массива.
         self.result = self.accumulation[-1]
         self.operations.append("undo")
         self.line.clear()
@@ -124,13 +129,13 @@ class NewLine:
 
     def redo(self):
         """
-        Вернуть последнюю отмену.
-        :return: Текущее состояние строки.
+         Redo last undo.
+         :return: The current state of the row.
         """
         undo_x = 0
         redo_x = 0
-        # Посчитать сколько redo и undo. Чтобы не отменить отмену больше раз, чем было.
-        # Чтобы не перекрутить массив при сдвиге.
+        # Calculate how many redo and undo. In order not to cancel the cancellation more times than it was.
+        # In order not to twist the array when shifting.
         for i in range(len(self.operations)-1, 0, -1):
             if self.operations[i] == "redo":
                 redo_x += 1
@@ -139,7 +144,7 @@ class NewLine:
                 undo_x += 1
             if self.operations[i] != "undo":
                 break
-        # Поменять местами первый и последний элемент - делаем сдвиг массива.
+        # Swap the first and last element - we shift the array.
         if redo_x < undo_x:
             self.accumulation.append(self.accumulation[0])
             self.accumulation.pop(0)
@@ -152,20 +157,20 @@ class NewLine:
 
     def error(self):
         """
-        Когда команда введена неверно.
-        :return: Последнее значение строки.
+         When the command is entered incorrectly.
+         :return: The last value of the string.
         """
         return self.accumulation[-1]
 
 
 def BastShoe(command: str):
     """
-    :param command: Вводимая строка
-    :return: Текущее состояние строки
+     :param command: Input string
+     :return: The current state of the row
     """
-    # Создать объект класса
+    # Create class object
     example = NewLine()
-    # Сделать из строки формата "1 Текст" массив, запятая по первому пробелу.
+    # Make an array from the "1 Text" format string, comma by first space.
     command = command.split(" ", 1)
     if command[0] == '1':
         return example.s(command[1])

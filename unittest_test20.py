@@ -54,7 +54,7 @@ class TestWork(unittest.TestCase):
         make_str(5)
         for undo in range(20):
             result = BastShoe("4")
-        self.assertTrue(result == "0")
+        self.assertTrue(result == "")
 
     def test_s_undo_s_undo(self):
         """
@@ -63,9 +63,24 @@ class TestWork(unittest.TestCase):
         Ожидаем результат: должна быть строка перед добавлением.
         """
         result = ""
+        print(make_str(5))  # Результат "01234"
+        print(BastShoe("4"))  # Результат "0123"
+        print(make_str(1))  # Результат "01230"
+        for undo in range(20):
+            result = BastShoe("4")
+        print(result)# Результат "0123"
+        self.assertTrue(result == "0123")
+
+    def test_s_undo_n_undo(self):
+        """
+        Удалить символь из строки после отмены и сделать множество отмен:
+        Добавим строки → отменим одно действие → добавим одну строку → множество отмен.
+        Ожидаем результат: должна быть строка перед добавлением.
+        """
+        result = ""
         make_str(5)  # Результат "01234"
         BastShoe("4")  # Результат "0123"
-        make_str(1)  # Результат "01230"
+        BastShoe("2 1")  # Результат "012"
         for undo in range(20):
             result = BastShoe("4")  # Результат "0123"
         self.assertTrue(result == "0123")
@@ -95,8 +110,8 @@ class TestWork(unittest.TestCase):
         Вернуть символ в рамках строки
         """
         make_str(5)
-        result = BastShoe("3 3")  # Результат "2"
-        self.assertTrue(result == "")
+        result = BastShoe("3 3")  # Результат "3"
+        self.assertTrue(result == "3")
 
     def test_i_out(self):
         """
@@ -117,13 +132,13 @@ class TestWork(unittest.TestCase):
     def test_big_s_big_undo(self):
         """
         Много строк добавить, но убрать больше.
-        Ожидаю в результате - первый символ
+        Ожидаю в результате пустую строку
         """
         result = ""
         make_str(1000)
         for undo in range(1005):
             result = BastShoe("4")  # Результат "0"
-        self.assertTrue(result == "0")
+        self.assertTrue(result == "")
 
     def test_task(self):
         """
