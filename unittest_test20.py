@@ -51,9 +51,10 @@ class TestWork(unittest.TestCase):
         Результат ожидаем - пусто.
         """
         result = ""
-        make_str(5)
+        print(make_str(5))
         for undo in range(20):
             result = BastShoe("4")
+            print(result)
         self.assertTrue(result == "")
 
     def test_s_undo_s_undo(self):
@@ -69,6 +70,22 @@ class TestWork(unittest.TestCase):
         for undo in range(20):
             result = BastShoe("4")  # Результат "0123"
         self.assertTrue(result == "0123")
+
+    def test_s_undo_s_undo_2(self):
+        """
+        Добавить строку после отмены и сделать множество отмен:
+        Добавим строки → отменим одно действие → добавим одну строку → множество отмен.
+        Ожидаем результат: должна быть строка перед добавлением.
+        Сейчас изначальный шаг - одно добавление.
+        """
+        result = ""
+        print(BastShoe("1 01234"))  # Результат "01234"
+        print(BastShoe("4"))  # Результат ""
+        print(BastShoe("1 1"))  # Результат "1"
+        for undo in range(20):
+            result = BastShoe("4")  # Результат "01234"
+            print(result)
+        self.assertTrue(result == "01234")
 
     def test_s_undo_n_undo(self):
         """

@@ -106,6 +106,8 @@ class NewLine:
 
         if flag_s == 1 and len(self.accumulation) == 1:
             self.result = ""
+            # self.accumulation.clear()
+            self.line.clear()
             return self.result
 
         count_undo = 0
@@ -119,7 +121,7 @@ class NewLine:
         if count_undo < len(self.accumulation) - 1:
             self.accumulation.insert(0, self.accumulation[-1])
             self.accumulation.pop(-1)
-        else:
+        elif count_undo >= len(self.accumulation) - 1 and flag_s != 2:
             self.result = ""
             self.operations.append("undo")
             return self.result
