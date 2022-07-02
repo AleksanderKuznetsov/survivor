@@ -9,9 +9,6 @@
 # print(test('test'))
 
 
-array = [1, 2, 3, 4]
+array = ['1']
 
-array.append(array[0])
-array.pop(0)
-
-print(array)
+print(array[-2])

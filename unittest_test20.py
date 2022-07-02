@@ -48,7 +48,7 @@ class TestWork(unittest.TestCase):
     def test_some_undo(self):
         """
         Отменить действий больше, чем строк.
-        Результат ожидаем - должна остаться первая строка.
+        Результат ожидаем - пусто.
         """
         result = ""
         make_str(5)
@@ -63,12 +63,11 @@ class TestWork(unittest.TestCase):
         Ожидаем результат: должна быть строка перед добавлением.
         """
         result = ""
-        print(make_str(5))  # Результат "01234"
-        print(BastShoe("4"))  # Результат "0123"
-        print(make_str(1))  # Результат "01230"
+        make_str(5)  # Результат "01234"
+        BastShoe("4")  # Результат "0123"
+        make_str(1)  # Результат "01230"
         for undo in range(20):
-            result = BastShoe("4")
-        print(result)# Результат "0123"
+            result = BastShoe("4")  # Результат "0123"
         self.assertTrue(result == "0123")
 
     def test_s_undo_n_undo(self):
@@ -167,6 +166,17 @@ class TestWork(unittest.TestCase):
         BastShoe("5")  # Результат "0"
         result = BastShoe("5")  # Результат "0"
         self.assertTrue(result == "0")
+
+    def test_some_undo_2(self):
+        """
+        Отменить действий больше, чем строк.
+        Результат ожидаем - должна остаться пусто
+        """
+        result = ""
+        BastShoe("1 a")
+        for undo in range(20):
+            result = BastShoe("4")  # Результат ""
+        self.assertTrue(result == "")
 
 
 if __name__ == '__main__':

@@ -100,8 +100,12 @@ class NewLine:
         # If there was one addition, then do not swap the accumulation elements,
         # how to do it will be below. Take the penultimate element.
         # This is necessary so as not to erase all the lines when canceling multiple times.
-        if flag_s == 1:
+        if flag_s == 1 and len(self.accumulation) == 2:
             self.result = self.accumulation[-2]
+            return self.result
+
+        if flag_s == 1 and len(self.accumulation) == 1:
+            self.result = ""
             return self.result
 
         count_undo = 0
