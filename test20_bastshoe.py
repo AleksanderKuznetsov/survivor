@@ -7,11 +7,12 @@ class NewLine:
     """
     Actions in a text editor. without encapsulation
     """
-    def __init__(self, line=[], accumulation=[], result='', operations=[]):
+    def __init__(self, line=[], accumulation=[], result='', operations=[], delete = []):
         self.line = line  # Array of the current row state. Add/remove characters here.
         self.accumulation = accumulation  # Array of row states after each step.
         self.result = result  # The result that we print after each step (str).
         self.operations = operations  # List of operations.
+        self.delete = delete
 
     # В конец текущей строки добавить строку
     def s(self, text):
@@ -106,8 +107,10 @@ class NewLine:
 
         if flag_s == 1 and len(self.accumulation) == 1:
             self.result = ""
-            # self.accumulation.clear()
+            self.delete.append(self.accumulation[-1])
+            self.accumulation.clear()
             self.line.clear()
+            self.operations.clear()
             return self.result
 
         count_undo = 0
@@ -138,6 +141,9 @@ class NewLine:
          Redo last undo.
          :return: The current state of the row.
         """
+        if self.accumulation == []:
+            result = self.delete[-1]
+            return result
         undo_x = 0
         redo_x = 0
         # Calculate how many redo and undo. In order not to cancel the cancellation more times than it was.

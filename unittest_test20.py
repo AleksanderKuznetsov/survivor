@@ -51,10 +51,9 @@ class TestWork(unittest.TestCase):
         Результат ожидаем - пусто.
         """
         result = ""
-        print(make_str(5))
+        make_str(5)
         for undo in range(20):
             result = BastShoe("4")
-            print(result)
         self.assertTrue(result == "")
 
     def test_s_undo_s_undo(self):
@@ -64,11 +63,12 @@ class TestWork(unittest.TestCase):
         Ожидаем результат: должна быть строка перед добавлением.
         """
         result = ""
-        make_str(5)  # Результат "01234"
-        BastShoe("4")  # Результат "0123"
-        make_str(1)  # Результат "01230"
+        print(make_str(5))  # Результат "01234"
+        print(BastShoe("4"))  # Результат "0123"
+        print(make_str(1))  # Результат "01230"
         for undo in range(20):
             result = BastShoe("4")  # Результат "0123"
+            print(result)
         self.assertTrue(result == "0123")
 
     def test_s_undo_s_undo_2(self):
@@ -79,13 +79,12 @@ class TestWork(unittest.TestCase):
         Сейчас изначальный шаг - одно добавление.
         """
         result = ""
-        print(BastShoe("1 01234"))  # Результат "01234"
-        print(BastShoe("4"))  # Результат ""
-        print(BastShoe("1 1"))  # Результат "1"
+        BastShoe("1 01234")  # Результат "01234"
+        BastShoe("4")  # Результат ""
+        BastShoe("1 1")  # Результат "1"
         for undo in range(20):
-            result = BastShoe("4")  # Результат "01234"
-            print(result)
-        self.assertTrue(result == "01234")
+            result = BastShoe("4")  # Результат ""
+        self.assertTrue(result == "")
 
     def test_s_undo_n_undo(self):
         """
@@ -112,6 +111,20 @@ class TestWork(unittest.TestCase):
         for undo in range(20):
             result = BastShoe("5")  # Результат "01234"
         self.assertTrue(result == "01234")
+
+    def test_s_undo_s_redo(self):
+        """
+        Тестирую Redo после Undo после одного s.
+
+        """
+        result = ""
+        BastShoe("1 1")  # Результат "1"
+        BastShoe("4")  # Результат ""
+        BastShoe("1 2")  # Результат "2"
+        BastShoe("4")  # Результат ""
+        for undo in range(20):
+            result = BastShoe("5")  # Результат "2"
+        self.assertTrue(result == "2")
 
     def test_n_more_count(self):
         """
