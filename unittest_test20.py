@@ -63,12 +63,11 @@ class TestWork(unittest.TestCase):
         Ожидаем результат: должна быть строка перед добавлением.
         """
         result = ""
-        print(make_str(5))  # Результат "01234"
-        print(BastShoe("4"))  # Результат "0123"
-        print(make_str(1))  # Результат "01230"
+        make_str(5)  # Результат "01234"
+        BastShoe("4")  # Результат "0123"
+        make_str(1)  # Результат "01230"
         for undo in range(20):
             result = BastShoe("4")  # Результат "0123"
-            print(result)
         self.assertTrue(result == "0123")
 
     def test_s_undo_s_undo_2(self):
