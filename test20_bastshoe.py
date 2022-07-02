@@ -143,6 +143,7 @@ class NewLine:
         """
         if self.accumulation == []:
             result = self.delete[-1]
+            self.accumulation.append(result)
             return result
         undo_x = 0
         redo_x = 0
