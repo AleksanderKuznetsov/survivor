@@ -134,28 +134,3 @@ def BastShoe(command: str):
 
 accumulation = [""]
 index = 0
-
-
-# print("1 Привет")
-# print(BastShoe("1 Привет"))
-#
-# print("1 , Мир!")
-# print(BastShoe("1 , Мир!"))
-#
-# print("4")
-# print(BastShoe("4"))
-#
-# print("5")
-# print(BastShoe("5"))
-#
-# print("3 6")
-# print(type(BastShoe("3 6")))
-#
-# # print("4")
-# # print(BastShoe("4"))
-#
-# # print("5")
-# # print(BastShoe("5"))
-
-
-
