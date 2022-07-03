@@ -252,9 +252,9 @@ class TestWork(unittest.TestCase):
         BastShoe("4")  # Результат "ab"
         BastShoe("5")  # Результат "abc"
         BastShoe("5")  # Результат "abc"
-        BastShoe("3 1")  # Результат "b"
+        BastShoe("3 100")  # Результат "b"
         result = BastShoe("4")  # Результат "abc"
-        self.assertTrue(result == "abc")
+        self.assertTrue(result == "ab")
 
 
 

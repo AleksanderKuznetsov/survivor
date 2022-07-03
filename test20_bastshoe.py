@@ -71,18 +71,12 @@ def BastShoe(command: str):
         global index, accumulation
         count = int(count)
         last_element = list(accumulation[0])
-        # If the character is out of range
         if count + 1 > len(last_element):
-            accumulation.insert(0, "")
-            result = accumulation[0]
-            # Zero index.
+            result = ""
             index = 0
             return result
-        # Zero index.
         index = 0
-        result = ''.join(accumulation[0][count])
-        accumulation.insert(0, result)
-        return result
+        return ''.join(accumulation[0][count])
 
     def undo():
         """
@@ -140,3 +134,28 @@ def BastShoe(command: str):
 
 accumulation = [""]
 index = 0
+
+
+# print("1 Привет")
+# print(BastShoe("1 Привет"))
+#
+# print("1 , Мир!")
+# print(BastShoe("1 , Мир!"))
+#
+# print("4")
+# print(BastShoe("4"))
+#
+# print("5")
+# print(BastShoe("5"))
+#
+# print("3 6")
+# print(type(BastShoe("3 6")))
+#
+# # print("4")
+# # print(BastShoe("4"))
+#
+# # print("5")
+# # print(BastShoe("5"))
+
+
+
