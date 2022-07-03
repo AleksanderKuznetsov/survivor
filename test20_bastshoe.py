@@ -80,7 +80,9 @@ def BastShoe(command: str):
             return result
         # Zero index.
         index = 0
-        return ''.join(accumulation[0][count])
+        result = ''.join(accumulation[0][count])
+        accumulation.insert(0, result)
+        return result
 
     def undo():
         """

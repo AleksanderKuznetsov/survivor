@@ -219,9 +219,43 @@ class TestWork(unittest.TestCase):
         BastShoe("4")  # Результат ""
         BastShoe("4")  # Результат ""
         BastShoe("5")  # Результат "a"
-        BastShoe("5")  # Результат "a"
-        result = BastShoe("5")  # Результат "a"
+        BastShoe("5")  # Результат "aa"
+        result = BastShoe("5")  # Результат "aa"
         self.assertTrue(result == "aa")
+
+    def test_2some_3undo_3redo(self):
+        """
+        Отменить действий больше, чем строк.
+        Результат ожидаем - должна остаться пусто
+        """
+        result = ""
+        BastShoe("1 a")  # Результат "a"
+        BastShoe("1 a")  # Результат "aa"
+        BastShoe("4")  # Результат "a"
+        BastShoe("4")  # Результат ""
+        BastShoe("4")  # Результат ""
+        BastShoe("5")  # Результат "a"
+        BastShoe("5")  # Результат "aa"
+        BastShoe("5")  # Результат "aa"
+        BastShoe("4")  # Результат "a"
+        self.assertTrue(result == "")
+
+    def test_3some_1undo_2redo_i_undo(self):
+        """
+        Отменить действий больше, чем строк.
+        Результат ожидаем - должна остаться пусто
+        """
+        result = ""
+        BastShoe("1 a")  # Результат "a"
+        BastShoe("1 b")  # Результат "ab"
+        BastShoe("1 c")  # Результат "abc"
+        BastShoe("4")  # Результат "ab"
+        BastShoe("5")  # Результат "abc"
+        BastShoe("5")  # Результат "abc"
+        BastShoe("3 1")  # Результат "b"
+        result = BastShoe("4")  # Результат "abc"
+        self.assertTrue(result == "abc")
+
 
 
 if __name__ == '__main__':
