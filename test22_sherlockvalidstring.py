@@ -15,16 +15,17 @@ def SherlockValidString(text: str) -> bool:
     dictionary = {}  # In this dictionary we will add up the count of the number of repetitions.
     dictionary2 = {}  # Add the number of values to this dictionary.
     # Form a dictionary with counting the number of repetitions.
-    for item in enumerate(text):
-        value = dictionary.get(item, 0)  # Get the key value. If not, 0.
-        value += 1  # To the value of the key +1 (making a counter).
-        dictionary[item] = value  # Add a pair to the dictionary. The value is a counter.
+    for i, item in enumerate(text):
+        x = dictionary.get(item, 0)  # Get the key value. If not, 0.
+        x += 1  # To the value of the key +1 (making a counter).
+        dictionary[item] = x  # Add a pair to the dictionary. The value is a counter.
+
 
     # Form a dictionary. Count the number of values.
-    for value in dictionary.items():
-        value = dictionary2.get(value, 0)
-        value += 1
-        dictionary2[value] = value
+    for key, value in dictionary.items():
+        x = dictionary2.get(value, 0)
+        x += 1
+        dictionary2[value] = x
 
     # Sort the dictionary in descending order of values.
     # The last value will be the one that you can try to reduce.
@@ -41,7 +42,7 @@ def SherlockValidString(text: str) -> bool:
     # in this case, the last element of the value = 1, means the removal of one
     # of the symbol will give True. {1:3, 2:1} means that 1 character is repeated 3 times,
     # and 2 characters - once. Therefore, we can delete 1 character and it will be True.
-    if len(key_list) == 2 and value_list[1] == 1 and key_list[1] - key_list[0] == abs(1):
+    if len(key_list) == 2 and abs(key_list[1] - key_list[0]) == 1 and value_list[1] == 1:
         return True
 
     # Otherwise, if dictionary2 has more than 2 keys, then the condition will not work.
