@@ -20,7 +20,6 @@ def SherlockValidString(text: str) -> bool:
         x += 1  # To the value of the key +1 (making a counter).
         dictionary[item] = x  # Add a pair to the dictionary. The value is a counter.
 
-
     # Form a dictionary. Count the number of values.
     for key, value in dictionary.items():
         x = dictionary2.get(value, 0)
