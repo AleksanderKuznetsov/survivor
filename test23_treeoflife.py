@@ -38,31 +38,55 @@ def TreeOfLife(lines: int, columns: int, years: int, array: list) -> list:
                     break
                 # Top left corner
                 if z == 0 and y == 0 and temp[y][z] >= 3:
-                    temp[y][z] = temp[y+1][z] = temp[y][z+1] = 0
+                    if temp[y+1][z] < 3:
+                        temp[y+1][z] = 0
+                    if temp[y][z+1] < 3:
+                        temp[y][z+1] = 0
+                    temp[y][z] = 0
                 # Bottom right corner
                 if z == columns-1 and y == lines-1 and temp[y][z] >= 3:
-                    temp[y][z] = temp[y][z-1] = temp[y-1][z] = 0
+                    temp[y][z] = temp[y-1][z] = temp[y][z-1] = 0
                 # Lower left corner
                 if z == 0 and y == lines-1 and temp[y][z] >= 3:
-                    temp[y][z] = temp[y][z+1] = temp[y-1][z] = 0
+                    if temp[y][z+1] < 3:
+                        temp[y][z+1] = 0
+                    temp[y][z] = temp[y-1][z] = 0
                 # Top right corner
                 if z == columns-1 and y == 0 and temp[y][z] >= 3:
-                    temp[y][z] = temp[y+1][z] = temp[y][z-1] = 0
+                    if temp[y+1][z] < 3:
+                        temp[y+1][z] = 0
+                    temp[y][z] = temp[y][z-1] = 0
                 # Bottom line
                 if z != 0 and z != columns-1 and y == 0 and temp[y][z] >= 3:
-                    temp[y][z] = temp[y+1][z] = temp[y][z+1] = temp[y][z-1] = 0
+                    if temp[y][z+1] < 3:
+                        temp[y][z+1] = 0
+                    if temp[y+1][z] < 3:
+                        temp[y+1][z] = 0
+                    temp[y][z] = temp[y][z-1] = 0
                 # Top line
                 if z != 0 and z != columns-1 and y == lines-1 and temp[y][z] >= 3:
-                    temp[y][z] = temp[y-1][z] = temp[y][z+1] = temp[y][z-1] = 0
+                    if temp[y][z+1] < 3:
+                        temp[y][z+1] = 0
+                    temp[y][z] = temp[y-1][z] = temp[y][z-1] = 0
                 # Left column
                 if z == 0 and y != 0 and y != lines-1 and temp[y][z] >= 3:
-                    temp[y][z] = temp[y+1][z] = temp[y-1][z] = temp[y][z+1] = 0
+                    if temp[y][z+1] < 3:
+                        temp[y][z+1] = 0
+                    if temp[y+1][z] < 3:
+                        temp[y+1][z] = 0
+                    temp[y][z] = temp[y-1][z] = 0
                 # Right column
                 if z == columns-1 and y != 0 and y != lines-1 and temp[y][z] >= 3:
-                    temp[y][z] = temp[y+1][z] = temp[y-1][z] = temp[y][z-1] = 0
+                    if temp[y+1][z] < 3:
+                        temp[y+1][z] = 0
+                    temp[y][z] = temp[y-1][z] = temp[y][z-1] = 0
                 # Middle.
                 if temp[y][z] >= 3:
-                    temp[y][z] = temp[y+1][z] = temp[y-1][z] = temp[y][z+1] = temp[y][z-1] = 0
+                    if temp[y][z+1] < 3:
+                        temp[y][z+1] = 0
+                    if temp[y+1][z] < 3:
+                        temp[y+1][z] = 0
+                    temp[y][z] = temp[y-1][z] = temp[y][z-1] = 0
 
     # Change numbers back to signs
     for y in range(lines):
@@ -73,7 +97,7 @@ def TreeOfLife(lines: int, columns: int, years: int, array: list) -> list:
             else:
                 temp[y][z] = "+"
 
-    # Вернуть массив в строку
+    # Return an array to a string
     array.clear()
     for i, count in enumerate(temp):
         array.append(''.join(count))
