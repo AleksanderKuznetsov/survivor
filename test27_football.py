@@ -18,6 +18,13 @@ def Football(array: list, N: int) -> bool:
     for line in array:
         temp.append(line)
 
+    # If sorting already exists.
+    for i in range(N):
+        if array_sort[i] != temp[i]:
+            break
+        if i == N-1 and array_sort[i] == temp[i]:
+            return False
+
     # Option 1. Replacing two arbitrary elements.
     for i in range(N):
         if array_sort[i] != temp[i]:
