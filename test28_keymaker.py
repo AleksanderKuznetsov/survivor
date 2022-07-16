@@ -1,7 +1,6 @@
 """
 Write a program that simulates the operation of the Key Wizard.
 """
-
 def Keymaker(k: int) -> str:
     """
     1. In the first step, he opens all the doors.
@@ -13,29 +12,23 @@ def Keymaker(k: int) -> str:
     :return: Door status bar.
     """
     array = []
-    # Add the array with closed doors.
-    for key in range(k):
-        array.append(1)
+    count = 1
 
-    for key in range(1, k + 1):
-        if key == 2 or key == 3:
-            array[key - 1] = 0
-        # Regularity - after the fourth character, the alternation of 000 and 111.
-        if key > 4 and 0 < (key - 4) % 6 <= 3:
-            array[key - 1] = 0
-
-    # Translate int→str.
-    for key in range(k):
-        array[key] = str(array[key])
+    for key in range(1, k+1):
+        if key == count**2:  # sequence of squares of natural numbers.
+            array.append("1")
+            count += 1
+            continue
+        array.append("0")
 
     return ''.join(array)
 
 
-def new_function(count: int) -> None:
+def new_function(count):
     """
     Apply Keymaker function need number of times.
     :param count: How many keys.
     :return: str
     """
-    for key in range(1, count+1):
+    for key in range(count):
         print(Keymaker(key), "//", key)
